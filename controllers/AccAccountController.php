@@ -11,7 +11,8 @@ class AccAccountController extends Controller
 
         $this->views = array(
             'view_index' => 'application.yii1-module-acc-mngr.views.account.index',
-            'view_signUp' => 'application.yii1-module-acc-mngr.views.account.signUp'
+            'view_signUp' => 'application.yii1-module-acc-mngr.views.account.signUp',
+            'view_security' => 'application.yii1-module-acc-mngr.views.account.security'
         );
 
 
@@ -125,6 +126,102 @@ class AccAccountController extends Controller
             'termAccount' => $termAccount,
             'user' => $user
         ));
+    }
+
+    public function actionSecurity(){
+
+        $webUser = Yii::app()->user;
+        $account = $webUser->account;
+
+        $account->newPassword = $account->password;
+
+        $this->render($this->views['view_security'], array(
+            'account' => $account
+        ));
+
+    }
+
+    public function actionUpdateEmailAddress() {
+
+        if(isset($_POST['Account'])) {
+
+            $webUser = Yii::app()->user;
+            $account = $webUser->account;
+
+            $account->setScenario('changeEmailAddress');
+
+            $account->setAttributes($_POST['Account']);
+
+            $valid = $account->validate();
+
+            if($valid) {
+                
+                $account->changeEmailAddress();
+
+                if($account->save(false)) {
+
+                    Yii::app()->user->id = $account->email_address;
+                    Yii::app()->user->name = $account->email_address;
+                    Yii::app()->user->setFlash('email-address-success', "Email Address successfully updated.");
+                }
+
+            }
+
+            if(!$valid) {
+                $errorMessage = "<strong>Updating Email Address failed.</strong> <br /><br />";
+
+                $errorMessage .= CHtml::errorSummary($account);
+
+                Yii::app()->user->setFlash('email-address-error', $errorMessage);
+            }
+
+            $this->redirect(Yii::app()->user->returnUrl);
+
+        }
+
+    }
+
+    public function actionChangePassword() {
+
+        if(isset($_POST['Account'])) {
+
+            $webUser = Yii::app()->user;
+            $account = $webUser->account;
+
+            $account->setScenario('changePassword');
+
+            $account->setAttributes($_POST['Account']);
+
+            $valid = $account->validate();
+
+            if($valid) {
+
+                $account->changePassword();
+
+                if($account->save(false)) {
+                    Yii::app()->user->setFlash('change-password-success', "Password successfully changed.");
+
+                }
+                else
+                    $valid = false;
+
+            }
+            else 
+                $valid = false;
+
+            if(!$valid) {
+
+                $errorMessage = "<strong>Changing Password failed.</strong> <br /><br />";
+                $errorMessage .= CHtml::errorSummary($account);
+
+                Yii::app()->user->setFlash('change-password-error', $errorMessage);
+
+            }
+
+            $this->redirect(Yii::app()->user->returnUrl);
+
+        }
+
     }
 
     // Uncomment the following methods and override them if needed

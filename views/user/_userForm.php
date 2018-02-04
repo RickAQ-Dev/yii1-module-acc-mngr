@@ -1,3 +1,28 @@
+<?php 
+
+Yii::app()->clientScript->registerCss("profile-img", "
+
+	.user-profile-img svg, .user-profile-img img {
+
+		height: 100px;
+		width: 100px;
+		border-radius: 100px;
+		border: 1px solid #ddd;
+		margin-bottom: 50px;
+
+	}
+
+")
+
+?>
+<div class="row">
+	<div class="col-md-12">
+		<div class="user-profile-img text-center">
+			<i data-feather="user"></i>
+		</div>
+	</div>
+</div>
+
 <div class="row">
 	<div class="col-md-12">
 		<?php
@@ -37,63 +62,73 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-6">
-			<div class="form-group">
-				<?php echo $form->labelEx($user,'first_name'); ?>
-				<?php echo $form->textField($user,'first_name', array('class' => 'form-control')); ?>
-				<?php echo $form->error($user,'first_name'); ?>
-			</div>			
-		</div>
-		<div class="col-md-6">
-			<div class="form-group">
-				<?php echo $form->labelEx($user,'last_name'); ?>
-				<?php echo $form->textField($user,'last_name', array('class' => 'form-control')); ?>
-				<?php echo $form->error($user,'last_name'); ?>
+		
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<?php echo $form->labelEx($user,'first_name'); ?>
+						<?php echo $form->textField($user,'first_name', array('class' => 'form-control')); ?>
+						<?php echo $form->error($user,'first_name'); ?>
+					</div>			
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<?php echo $form->labelEx($user,'last_name'); ?>
+						<?php echo $form->textField($user,'last_name', array('class' => 'form-control')); ?>
+						<?php echo $form->error($user,'last_name'); ?>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-md-2">
-			<div class="form-group">
-				<?php echo $form->labelEx($user,'street_no'); ?>
-				<?php echo $form->textField($user,'street_no', array('class' => 'form-control')); ?>
-				<?php echo $form->error($user,'street_no'); ?>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<?php echo $form->labelEx($user,'street_no'); ?>
+						<?php echo $form->textField($user,'street_no', array('class' => 'form-control')); ?>
+						<?php echo $form->error($user,'street_no'); ?>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="form-group">
+						<?php echo $form->labelEx($user,'street'); ?>
+						<?php echo $form->textField($user,'street', array('class' => 'form-control')); ?>
+						<?php echo $form->error($user,'street'); ?>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<?php echo $form->labelEx($user,'city'); ?>
+						<?php echo $form->textField($user,'city', array('class' => 'form-control')); ?>
+						<?php echo $form->error($user,'city'); ?>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="col-md-5">
-			<div class="form-group">
-				<?php echo $form->labelEx($user,'street'); ?>
-				<?php echo $form->textField($user,'street', array('class' => 'form-control')); ?>
-				<?php echo $form->error($user,'street'); ?>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<?php echo $form->labelEx($user,'location'); ?>
+						<?php echo $form->textField($user,'location', array('class' => 'form-control')); ?>
+						<?php echo $form->error($user,'location'); ?>
+					</div>			
+				</div>
 			</div>
-		</div>
-		<div class="col-md-5">
-			<div class="form-group">
-				<?php echo $form->labelEx($user,'city'); ?>
-				<?php echo $form->textField($user,'city', array('class' => 'form-control')); ?>
-				<?php echo $form->error($user,'city'); ?>
+
+			<br />
+			<br />
+
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<?php echo CHtml::submitButton('Update Information', array('class' => 'btn btn-lg btn-primary')); ?>
+				</div>
 			</div>
-		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-md-6">
-			<div class="form-group">
-				<?php echo $form->labelEx($user,'location'); ?>
-				<?php echo $form->textField($user,'location', array('class' => 'form-control')); ?>
-				<?php echo $form->error($user,'location'); ?>
-			</div>			
 		</div>
-	</div>
+		<div class="col-md-2"></div>
 
-	<br />
-	<br />
-
-	<div class="row">
-		<div class="col-md-12 text-center">
-			<?php echo CHtml::submitButton('Update Information', array('class' => 'btn btn-lg btn-primary')); ?>
-		</div>
 	</div>
 
 	<?php $this->endWidget(); ?>

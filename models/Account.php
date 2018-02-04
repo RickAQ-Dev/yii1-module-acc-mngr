@@ -35,11 +35,11 @@ class Account extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email_address,', 'required', 'on' =>'signup'),
-			array('email_address', 'checkValidity', 'on' => 'signup'),
-			array('newPassword,confirmPassword', 'required', 'on' =>'signup'),
+			array('email_address,', 'required', 'on' =>'signup, changeEmailAddress'),
+			array('email_address', 'checkValidity', 'on' => 'signup, changeEmailAddress'),
+			array('newPassword,confirmPassword', 'required', 'on' =>'signup, changePassword',),
 			array('newPassword', 'length', 'min'=>8),
-			array('newPassword','validateNewPassword', 'on' => 'signup'),
+			array('newPassword','validateNewPassword', 'on' => 'signup, changePassword'),
 			array('termsAndConditions', 'validateTerm', 'on' => 'agreeonterms'),
 			array('salt, active', 'numerical', 'integerOnly'=>true),
 			array('username, email_address', 'length', 'max'=>200),
@@ -200,6 +200,26 @@ class Account extends CActiveRecord
 		$model = Account::model()->find(array('condition' => 'email_address=:email_address', 'params' => array(':email_address' => $emailAddress)));
 
 		return $model;
+
+	}
+
+	public function hashPassword($password) {
+
+		return password_hash($password, PASSWORD_BCRYPT);
+
+	}
+
+	public function changePassword() {
+
+		$hashPassword = $this->hashPassword($this->newPassword);
+
+		$this->password = $hashPassword;
+
+	}
+
+	public function changeEmailAddress() {
+
+		$this->username = $this->email_address;
 
 	}
 }
