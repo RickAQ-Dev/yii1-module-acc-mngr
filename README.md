@@ -10,14 +10,10 @@ Download the module project [here](https://github.com/RickAQ-Dev/yii1-module-acc
 Extract the .zip folder inside the **/protected** directory of your yii project.
 
 The folder should contain the following folders:
-* components
-  * views
 * controllers
 * models
 * views
-  * account
-  * profile
-  * user
+  * todo
 
 ## Step 3 : Import Classes
 Import the classes in the project directory into your yii project configuration.
@@ -54,9 +50,9 @@ You have successfully added the module classes into your yii1 project.
 You can user the project controllers by extending the classes into your project classes.
 Ex.
 
-If you have **FooController.php** in your yii project **protected/controllers**. And you want to use the **AccAccountController.php**. 
+If you have **FooController.php** in your yii project **protected/controllers**. And you want to use the **tdTodoController.php**. 
 
-Update your **FooController.php** file and change **extends Controller** to **extends AccAccountController**.
+Update your **FooController.php** file and change **extends Controller** to **extends tdTodoController**.
 
 From:
 ```
@@ -69,6 +65,6 @@ From:
 To:
 ```
  <?php
-     class FooController extends AccAccountController
+     class FooController extends tdTodoController
 
 ```
