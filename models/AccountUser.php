@@ -8,6 +8,10 @@
  * @property string $first_name
  * @property string $last_name
  * @property string $dob
+ * @property string $street_no
+ * @property string $street
+ * @property string $city
+ * @property string $location
  *
  * The followings are the available model relations:
  * @property AccAccount $account
@@ -32,6 +36,9 @@ class AccountUser extends CActiveRecord
 		return array(
 			array('first_name, last_name', 'required'),
 			array('first_name, last_name', 'length', 'max'=>150),
+			array('street_no,street, city, location', 'required', 'on' => 'updateInfo'),
+			array('street_no', 'length', 'max'=>100),
+            array('street, city, location', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('account_id, first_name, last_name, dob', 'safe', 'on'=>'search'),
@@ -59,7 +66,12 @@ class AccountUser extends CActiveRecord
 			'account_id' => 'Account',
 			'first_name' => 'First Name',
 			'last_name' => 'Last Name',
-			'dob' => 'Date of Birth'
+			'dob' => 'Date of Birth',
+
+			'street_no' => 'Street No',
+            'street' => 'Street',
+            'city' => 'City',
+            'location' => 'Location',
 		);
 	}
 
@@ -101,4 +113,11 @@ class AccountUser extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function getCompleteName() {
+
+		return $this->first_name.' '.$this->last_name;
+
+	}
+
 }

@@ -22,7 +22,24 @@
 
 			<div class="row">
 				<div class="col-md-12">
-					<?php echo $form->errorSummary(array($account,$user),null,null, array('class' => 'alert alert-danger')); ?>
+					<?php echo $form->errorSummary(array($user,$account),null,null, array('class' => 'alert alert-danger')); ?>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<?php echo $form->label($user,'first_name'); ?>
+						<?php echo $form->textField($user,'first_name', array('class' => 'form-control')); ?>
+						<?php echo $form->error($user,'first_name'); ?>
+					</div>	
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<?php echo $form->label($user,'last_name'); ?>
+						<?php echo $form->textField($user,'last_name', array('class' => 'form-control')); ?>
+						<?php echo $form->error($user,'last_name'); ?>
+					</div>	
 				</div>
 			</div>
 
@@ -50,23 +67,6 @@
 						<?php echo $form->passwordField($account,'confirmPassword', array('class' => 'form-control')); ?>
 						<?php echo $form->error($account,'confirmPassword'); ?>
 					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<?php echo $form->label($user,'first_name'); ?>
-						<?php echo $form->textField($user,'first_name', array('class' => 'form-control')); ?>
-						<?php echo $form->error($user,'first_name'); ?>
-					</div>	
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<?php echo $form->label($user,'last_name'); ?>
-						<?php echo $form->textField($user,'last_name', array('class' => 'form-control')); ?>
-						<?php echo $form->error($user,'last_name'); ?>
-					</div>	
 				</div>
 			</div>
 

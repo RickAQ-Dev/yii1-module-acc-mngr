@@ -1,6 +1,6 @@
 <?php
 
-class AccAccountController extends Controller
+class AccProfileController extends Controller
 {
 
     public $views = array();
@@ -10,8 +10,7 @@ class AccAccountController extends Controller
         parent::init();
 
         $this->views = array(
-            'view_index' => 'application.yii1-module-acc-mngr.views.account.index',
-            'view_signUp' => 'application.yii1-module-acc-mngr.views.account.signUp'
+            'view_index' => 'application.yii1-module-acc-mngr.views.profile.index',
         );
 
 
@@ -77,52 +76,13 @@ class AccAccountController extends Controller
 
     public function actionIndex()
     {
-        $this->render($this->views['view_index']);
-    }
 
-    public function actionSignUp(){
+        $webUser = Yii::app()->user;
+        $account = $webUser->account;
+        $user = $account->user;
 
-        $this->pageTitle = 'Sign Up';
-
-        $account = new Account;
-        $termAccount = new Account;
-        $user = new AccountUser;
-
-        if(isset($_POST['Account']) && isset($_POST['AccountUser'])) {
-
-            $account->attributes = $_POST['Account'];
-            $termAccount->attributes = $_POST['Account'];
-            $user->attributes = $_POST['AccountUser'];
-
-            $termAccount->setScenario('agreeonterms');
-            $account->setScenario('signup');
-            $user->setScenario('signup');
-
-            $valid = $user->validate();
-            $valid = $account->validate() && $valid;
-            $valid = $termAccount->validate() && $valid;
-
-            if($valid) {
-
-                if($account->save(false))  {
-                    $user->account_id = $account->id;
-
-                    if($user->save(false)) {
-
-                        Yii::app()->user->setFlash('success', 'You have successfully registered. Please login using your username and password.');
-
-                        $this->redirect(Yii::app()->user->loginUrl);
-
-                    }
-                }
-
-            }
-
-        }
-
-        $this->render($this->views['view_signUp'], array(
+        $this->render($this->views['view_index'], array(
             'account' => $account,
-            'termAccount' => $termAccount,
             'user' => $user
         ));
     }
