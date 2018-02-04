@@ -50,9 +50,9 @@ You have successfully added the module classes into your yii1 project.
 You can user the project controllers by extending the classes into your project classes.
 Ex.
 
-If you have **FooController.php** in your yii project **protected/controllers**. And you want to use the **tdTodoController.php**. 
+If you have **FooController.php** in your yii project **protected/controllers**. And you want to use the **AccAccountController.php**. 
 
-Update your **FooController.php** file and change **extends Controller** to **extends tdTodoController**.
+Update your **FooController.php** file and change **extends Controller** to **extends AccAccountController**.
 
 From:
 ```
@@ -65,6 +65,6 @@ From:
 To:
 ```
  <?php
-     class FooController extends tdTodoController
+     class FooController extends AccAccountController
 
 ```
