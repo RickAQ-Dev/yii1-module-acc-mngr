@@ -10,10 +10,14 @@ Download the module project [here](https://github.com/RickAQ-Dev/yii1-module-acc
 Extract the .zip folder inside the **/protected** directory of your yii project.
 
 The folder should contain the following folders:
+* components
+ * views
 * controllers
 * models
 * views
-  * todo
+  * account
+  * profile
+  * user
 
 ## Step 3 : Import Classes
 Import the classes in the project directory into your yii project configuration.
